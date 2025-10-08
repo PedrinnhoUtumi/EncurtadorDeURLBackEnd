@@ -22,18 +22,26 @@ export class LinkRepository {
     return result[0] || null;
   }
 
-  async create(urlnormal, linkData) {
-    const id = randomUUID();
-    const urlencurtada = "https://exemplo.com/link-original";
-    const datacriacao = new Date().toISOString().split('T')[0];    const result = await this.db.insert(links).values({
-      id:id,
-      urlNormal: urlnormal,
-      dataCriacao: datacriacao,
-      urlEncurtada: urlencurtada,
-      ...linkData,
+async create(urlNormal, linkData) {
+  const id = randomUUID();
+  const urlencurtada = "https://exemplo.com/link-original";
+  const datacriacao = new Date().toISOString().split('T')[0];
+
+  try {
+    const result = await this.db.insert(links).values({
+      id: id,
+      urlnormal: urlNormal,
+      datacriacao: datacriacao,
+      urlencurtada: urlencurtada,
+      legendalink: linkData.legendaLink
     }).returning();
+
     return result[0];
+
+  } catch (e) {
+    return e;
   }
+}
 
   async update(id, linkData) {
     const result = await this.db.update(links)

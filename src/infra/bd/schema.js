@@ -1,9 +1,9 @@
-import { pgTable, uuid, text, date } from 'drizzle-orm/pg-core';
+import { pgTable, serial, varchar, date } from 'drizzle-orm/pg-core';
 
 export const links = pgTable('links', {
-  id: uuid('id').primaryKey(),
-  legendaLink: text('legendalink').notNull(),
-  urlEncurtada: text('urlencurtada').notNull().unique(),
-  urlNormal: text('urlnormal'),
+  id: serial('id').primaryKey(), 
+  legendaLink: varchar('legendalink').notNull(),
+  urlEncurtada: varchar('urlencurtada').notNull().unique(),
+  urlNormal: varchar('urlnormal'),
   dataCriacao: date('datacriacao'),
 });

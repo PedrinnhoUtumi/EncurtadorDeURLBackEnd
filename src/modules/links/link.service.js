@@ -18,8 +18,8 @@ export class LinkService {
 
     // if (re.test(urlnormal)) {
     return await this.LinkRepository.create(urlnormal, linkData); 
-    // } 
-    // return re.test(urlnormal)
+    // // // // // // // } 
+    // // // // // // // return re.test(urlnormal)
   }
 
   updatelink(id, linkData) {

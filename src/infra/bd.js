@@ -1,10 +1,18 @@
 // src/infra/bd.js
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { Pool } from 'pg';
+import pkg from 'pg';
+const { Pool } = pkg;
 
-const pool = new Pool({
-  connectionString: "postgresql://postgres.zawkaeikewgsxmdupqkp:postgres@aws-1-sa-east-1.pooler.supabase.com:5432/trabalhoEncurtadorUrl",
-});
+let pool;
 
-export const db = drizzle(pool); // ← aqui sim criamos o objeto que tem .insert()
+if (!pool) {
+  pool = new Pool({
+    connectionString: "postgres://postgres.zawkaeikewgsxmdupqkp:postgres@aws-1-sa-east-1.pooler.supabase.com:5432/trabalhoEncurtadorUrl ",
+    ssl: { rejectUnauthorized: false },
+    max: 5,
+    idleTimeoutMillis: 30000,
+  });
+}
+
+export const db = drizzle(pool);
