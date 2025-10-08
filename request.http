@@ -1,0 +1,11 @@
+### Variáveis
+@url = http://localhost:3000
+
+## POST
+POST {{url}}/links
+Content-Type: application/json
+
+{
+"urlNormal": "https://www.google.com/search?client=firefox-b-lm&sca_esv=f3ee8fd9fd7caba2&sxsrf=AE3TifMiQlt5qOyY31ABA7HnQ0nOAxfZjA:1759925898064&q=JOGADOR+FAMOSO+DE+VOLEIBOL+QUE+JOGA+COM+A+9&sa=X&ved=2ahUKEwi6xPDvypSQAxVMrJUCHef3MdQQ7xYoAHoECBAQAQ&biw=1787&bih=829&dpr=0.9",
+"legendaLink": "JOGADOR FAMOSO DE VOLEIBOL QUE JOGA COM A 9"
+}
