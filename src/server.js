@@ -18,7 +18,7 @@
 
 import fastify from "fastify";
 import cors from "@fastify/cors";
-import { linkRoutes } from "./link.routes.js"; 
+import { linkRoutes } from "./modules/links/link.routes.js"; 
 
 const server = fastify({
   logger: true

@@ -12,7 +12,7 @@ export class LinkService {
     return this.LinkRepository.findById(id);
   }
 
-  createlink(urlnormal, linkData) {
+  createLink(urlnormal, linkData) {
 
     var re = new RegExp("^((http(s?):\/\/(www.)?[a-z]+.com\/)|(magnet:\?xt=urn:btih:))")
     

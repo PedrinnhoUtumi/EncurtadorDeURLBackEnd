@@ -23,10 +23,11 @@ export class LinkRepository {
     return result[0] || null;
   }
 
-  async create(linkData) {
+  async create(urlnormal, linkData) {
     const id = randomUUID();
     const result = await this.db.insert(links).values({
       id,
+      urlnormal,
       ...linkData,
     }).returning();
     return result[0];
