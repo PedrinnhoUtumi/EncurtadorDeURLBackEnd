@@ -19,14 +19,17 @@ export class LinkController {
     }
 
     async createLink(request, reply) {
-        const { urlnormal } = request.params;
-        const novoLink = this.linkService.createLink(urlnormal, request.body);
+        const { urlnormal } = request.body;
+      
+        const novoLink = await this.linkService.createLink(urlnormal, request.body);
+        
         if (!novoLink) {
-            return reply.code(404).send({ message: "Impossível criar este link!" })
+          return reply.code(400).send({ message: `Impossível criar este link! ${novoLink}` });
         }
+      
         return reply.code(201).send(novoLink);
-
-    }
+      }
+      
 
     async getLinks(request, reply) {
         const links = this.linkService.getAllLinks();

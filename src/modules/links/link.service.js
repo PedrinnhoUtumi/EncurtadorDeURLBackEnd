@@ -12,14 +12,14 @@ export class LinkService {
     return this.LinkRepository.findById(id);
   }
 
-  createLink(urlnormal, linkData) {
+  async createLink(urlnormal, linkData) {
 
-    var re = new RegExp("^((http(s?):\/\/(www.)?[a-z]+.com\/)|(magnet:\?xt=urn:btih:))")
-    
-    if (!re.test(urlnormal)) {
-      return null
-    } 
-    return this.LinkRepository.create(urlnormal, linkData); 
+    var re = new RegExp("^(https?:\\/\\/[^\\s/$.?#].[^\\s]*)|(magnet:\\?xt=urn:btih:[a-fA-F0-9]{40,})", "i");
+
+    // if (re.test(urlnormal)) {
+    return await this.LinkRepository.create(urlnormal, linkData); 
+    // } 
+    // return re.test(urlnormal)
   }
 
   updatelink(id, linkData) {

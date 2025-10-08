@@ -1,13 +1,12 @@
 
 import { randomUUID } from 'node:crypto';
-import db from '../../infra/bd.js';
+import { db } from '../../infra/bd.js';
 import { eq } from 'drizzle-orm';
 import { links } from '../../infra/bd/schema.js';
 
 export class LinkRepository {
   constructor() {
     this.db = db;
-    
   }
 
   async findAll() {
@@ -25,9 +24,12 @@ export class LinkRepository {
 
   async create(urlnormal, linkData) {
     const id = randomUUID();
-    const result = await this.db.insert(links).values({
-      id,
-      urlnormal,
+    const urlencurtada = "https://exemplo.com/link-original";
+    const datacriacao = new Date().toISOString().split('T')[0];    const result = await this.db.insert(links).values({
+      id:id,
+      urlNormal: urlnormal,
+      dataCriacao: datacriacao,
+      urlEncurtada: urlencurtada,
       ...linkData,
     }).returning();
     return result[0];
