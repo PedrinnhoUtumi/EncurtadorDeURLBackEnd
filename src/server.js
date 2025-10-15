@@ -8,7 +8,10 @@ const server = fastify({
 
 const port = process.env.PORT || 3000;
 
-await server.register(cors); 
+await server.register(cors, {
+  origin: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+});
 await server.register(linkRoutes); 
 
 server.get("/", async (request, reply) => {
