@@ -9,7 +9,7 @@ const linkController = new LinkController(linkService);
 export async function linkRoutes(fastify, options) {
   
   fastify.get('/links', (request, reply) => 
-    linkController.getLinks(request, reply)
+    linkController.getAllLinks(request, reply)
   );
   fastify.get('/links/:id', (request, reply) => 
     linkController.getLinkById(request, reply)

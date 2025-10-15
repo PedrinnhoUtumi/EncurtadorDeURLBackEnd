@@ -16,32 +16,28 @@ export class LinkRepository {
 
   async findById(id) {
     const result = await this.db.select()
-      .from(links)  
+      .from(links)
       .where(eq(links.id, id));
 
     return result[0] || null;
   }
 
-async create(urlNormal, linkData) {
-  const id = randomUUID();
-  const urlencurtada = "https://exemplo.com/link-original";
-  const datacriacao = new Date().toISOString().split('T')[0];
+  async create(urlNormal, linkData, codigoGerado, dataCriacao) {
+    try {
+      const result = await this.db.insert(links).values({
+        urlNormal: urlNormal,
+        dataCriacao: dataCriacao,
+        codigoGerado: codigoGerado,
+        legendaLink: linkData.legendaLink
+      }).returning();
 
-  try {
-    const result = await this.db.insert(links).values({
-      id: id,
-      urlnormal: urlNormal,
-      datacriacao: datacriacao,
-      urlencurtada: urlencurtada,
-      legendalink: linkData.legendaLink
-    }).returning();
+      return result[0];
 
-    return result[0];
-
-  } catch (e) {
-    return e;
+    } catch (e) {
+      console.error('Erro ao inserir link:', e);
+      throw e;
+    }
   }
-}
 
   async update(id, linkData) {
     const result = await this.db.update(links)
@@ -58,5 +54,4 @@ async create(urlNormal, linkData) {
 
     return result.length > 0;
   }
-
 }

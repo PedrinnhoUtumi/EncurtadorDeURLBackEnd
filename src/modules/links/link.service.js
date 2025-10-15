@@ -1,32 +1,43 @@
+import { v4 as uuidv4 } from 'uuid';
+
+function generateLink() {
+  let codigoGerado = uuidv4()
+  let code = codigoGerado.substring(0, 6)
+  return code
+}
 
 export class LinkService {
   constructor(LinkRepository) {
     this.LinkRepository = LinkRepository;
   }
 
-  getAlllinks() {
-    return this.LinkRepository.findAll();
+  async getAllLinks() {
+    return await this.LinkRepository.findAll();
   }
 
-  getlinkById(id) {
-    return this.LinkRepository.findById(id);
+  async getLinkById(id) {
+    return await this.LinkRepository.findById(id);
   }
 
   async createLink(urlnormal, linkData) {
-
     var re = new RegExp("^(https?:\\/\\/[^\\s/$.?#].[^\\s]*)|(magnet:\\?xt=urn:btih:[a-fA-F0-9]{40,})", "i");
-
-    // if (re.test(urlnormal)) {
-    return await this.LinkRepository.create(urlnormal, linkData); 
-    // // // // // // // } 
-    // // // // // // // return re.test(urlnormal)
+    const codigoGerado = generateLink();
+    const dataCriacao = new Date().toISOString().split('T')[0];
+    try {
+      if (re.test(urlnormal)) {
+        return await this.LinkRepository.create(urlnormal, linkData, codigoGerado, dataCriacao); 
+      }
+    } catch (e) {
+      console.error('Erro ao inserir link:', e);
+      throw e;
+    }
   }
 
-  updatelink(id, linkData) {
-    return this.LinkRepository.update(id, linkData);
+  async updateLink(id, linkData) {
+    return await this.LinkRepository.update(id, linkData);
   }
 
-  deletelink(id) {
-    return this.LinkRepository.remove(id);
+  async deleteLink(id) {
+    return await this.LinkRepository.remove(id);
   }
 }

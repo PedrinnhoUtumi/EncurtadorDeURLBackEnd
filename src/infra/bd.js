@@ -1,18 +1,17 @@
-// src/infra/bd.js
-import 'dotenv/config';
+import dotenv from 'dotenv'
 import { drizzle } from 'drizzle-orm/node-postgres';
 import pkg from 'pg';
 const { Pool } = pkg;
+import { links } from './bd/schema.js'; 
 
-let pool;
+dotenv.config()
 
-if (!pool) {
-  pool = new Pool({
-    connectionString: "postgres://postgres.zawkaeikewgsxmdupqkp:postgres@aws-1-sa-east-1.pooler.supabase.com:5432/trabalhoEncurtadorUrl ",
-    ssl: { rejectUnauthorized: false },
-    max: 5,
-    idleTimeoutMillis: 30000,
-  });
-}
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+  max: 20,
+  idleTimeoutMillis: 30000,
+});
 
-export const db = drizzle(pool);
+export const db = drizzle(pool, { schema: { links } });
+

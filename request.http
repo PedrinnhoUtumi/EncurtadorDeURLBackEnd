@@ -1,6 +1,28 @@
 ### Variáveis
 @url = http://localhost:3000
 
+
+
+## GET
+GET {{url}}/links/1
+
+## GET
+GET {{url}}/links
+
+## POST
+PUT http://localhost:3000/links/1
+Content-Type: application/json
+
+{
+  "codigoGerado": "092",
+  "urlNormal": "https://moodle.utfpr.edu.br/mod/assign/view.php?id=1968820",
+  "legendaLink": "JOGADOR",
+  "dataCriacao": "2025-10-15"
+}
+
+## DELETE
+DELETE {{url}}/links/1
+
 ## POST
 POST {{url}}/links
 Content-Type: application/json
