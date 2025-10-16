@@ -1,6 +1,9 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
 import { linkRoutes } from "./modules/links/link.routes.js"; 
+import 'dotenv/config';
+
+require('dotenv').config();
 
 const server = fastify({
   logger: true
