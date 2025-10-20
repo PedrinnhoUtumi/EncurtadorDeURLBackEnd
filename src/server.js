@@ -22,8 +22,8 @@ server.get("/", async (request, reply) => {
   return reply.send("Servidor on");
 });
 
-server.listen({ port }).then(() => {
-  console.log("Servidor executando na porta", port);
+server.listen({ port, host: '0.0.0.0' }).then(() => {
+  console.log("Servidor executando na porta", port);  
 }).catch((error) => {
   console.error("Erro ao iniciar o servidor:", error);
   process.exit(1);
