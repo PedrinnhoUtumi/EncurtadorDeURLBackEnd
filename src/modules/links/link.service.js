@@ -38,7 +38,12 @@ export class LinkService {
   }
 
   async updateLink(id, linkData) {
-    return await this.LinkRepository.update(id, linkData);
+    var re = new RegExp("^(https?:\\/\\/[^\\s/$.?#].[^\\s]*)|(magnet:\\?xt=urn:btih:[a-fA-F0-9]{40,})", "i");
+    try {
+      if(re.test(linkData.urlNormal)) return await this.LinkRepository.update(id, linkData);
+    } catch (e) {
+      throw e
+    }
   }
 
   async deleteLink(id) {
