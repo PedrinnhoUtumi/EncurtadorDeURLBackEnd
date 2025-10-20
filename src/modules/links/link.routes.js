@@ -14,6 +14,9 @@ export async function linkRoutes(fastify, options) {
   fastify.get('/links/:id', (request, reply) => 
     linkController.getLinkById(request, reply)
   );
+  fastify.get('/incrementa/:code', (request, reply) => 
+    linkController.incrementClick(request, reply)
+  );
   fastify.post('/links', (request, reply) => 
     linkController.createLink(request, reply)
   );

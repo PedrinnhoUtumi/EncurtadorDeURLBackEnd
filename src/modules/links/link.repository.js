@@ -1,7 +1,7 @@
 
 import { randomUUID } from 'node:crypto';
 import { db } from '../../infra/bd.js';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { links } from '../../infra/bd/schema.js';
 
 export class LinkRepository {
@@ -53,5 +53,18 @@ export class LinkRepository {
       .returning({ id: links.id });
 
     return result.length > 0;
+  }
+
+  async incrementClick(code) {
+    const result = await this.db.update(links)
+      .set({
+        clicks: sql`${links.clicks} + 1`
+      })
+      .where(eq(links.codigoGerado, code))
+      .returning({
+        id: links.id,
+        clicks: links.clicks,
+      });
+    return result[0];  
   }
 }

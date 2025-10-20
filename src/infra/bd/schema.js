@@ -1,4 +1,4 @@
-import { pgTable, serial, varchar, date } from 'drizzle-orm/pg-core';
+import { pgTable, serial, varchar, date, integer } from 'drizzle-orm/pg-core';
 
 export const links = pgTable('links', {
   id: serial('id').primaryKey(), 
@@ -6,4 +6,5 @@ export const links = pgTable('links', {
   codigoGerado: varchar('codigogerado').notNull().unique(),
   urlNormal: varchar('urlnormal'),
   dataCriacao: date('datacriacao'),
+  clicks: integer('clicks').default(0)
 });

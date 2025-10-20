@@ -18,6 +18,10 @@ export class LinkService {
   async getLinkById(id) {
     return await this.LinkRepository.findById(id);
   }
+  
+  async incrementClick(code) {
+    return await this.LinkRepository.incrementClick(code);
+  }
 
   async createLink(urlnormal, linkData) {
     var re = new RegExp("^(https?:\\/\\/[^\\s/$.?#].[^\\s]*)|(magnet:\\?xt=urn:btih:[a-fA-F0-9]{40,})", "i");

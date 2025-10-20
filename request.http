@@ -4,9 +4,12 @@
 
 
 ## GET
-GET {{url}}/links/1
+GET {{url}}/incrementa/01
 
 ## GET
+GET {{url}}/links/1
+
+## GET  
 GET {{url}}/links
 
 ## POST
